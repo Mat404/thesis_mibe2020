@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title%}
+  QUIZ
+{% endblock %}
+
+{% block content%}
+    <br>
+<form action="./result" method="post">
+  {% for que in ques %}
+  <div class="row">
+    <div class="col-md-10">
+      <h3 style="color:blue;">  {{ forloop.counter }}.</h3> <h5>{{ que.question|safe }}</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+
+      <input type="radio" name="{{ que.id }}" value="{{ que.optiona }}">
+      {{ que.optiona }}
+
+    </div>
+    <div class="col-md-3">
+
+      <input type="radio" name="{{ que.id }}" value="{{ que.optionb }}">
+      {{ que.optionb }}
+
+    </div>
+  </div>
+
+
+  <br>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+
+      <input type="radio" name="{{ que.id }}" value="{{ que.optionc }}">
+      {{ que.optionc }}
+
+    </div>
+    <div class="col-md-3">
+
+      <input class="form_control" type="radio" name="{{ que.id }}" value="{{ que.optiond }}">
+      {{ que.optiond }}
+
+    </div>
+    <br>
+
+    <br>
+    <br>
+    <br>  <br>
+  </div>
+  {% endfor %}
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+       <input type="text" name="count" value="{{ ques|length }}" hidden>
+    <div class="col-xs-2">
+      <button type="submit" class="btn btn-block btn-success btn-md">Result</button>
+    </div>
+  </div>
+</form>
+    <br>    <br>
+{% endblock %}

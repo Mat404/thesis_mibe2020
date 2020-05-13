@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ block.super }} - Internships {% endblock head_title %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+
+
+{% for job in jobs %}
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          {{ job.posizione }}
+
+        </button>
+
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class='col' style='padding-top:10px;'>  Descrizione: <br>
+         {{ job.descrizione }}  </div>
+    <hr>
+    <div class='col' style='padding-top:40px;'>  Requisiti: <br>
+        {{ job.requisiti }}  </div>
+
+
+      <div class="card-body">
+    </div>
+
+  </div>
+
+</div>
+
+{% endfor %}
+
+
+
+
+{% endblock content %}

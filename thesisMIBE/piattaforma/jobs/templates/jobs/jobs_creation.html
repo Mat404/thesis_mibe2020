@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}{{ block.super }} - Internships {% endblock head_title %}
+
+{% block content %}
+
+<br>
+
+<div class=card-header>
+<h1> post </h1>
+<p> post </p>
+</div>
+
+<div class='card-body' style="text-align: center ;font-family: 'Bangers',cursive";>
+    <h2 style='font-size:45px'> POST HERE THE MOCK INTERN YOU WOULD </h2>
+
+</div>
+
+<div class="row justify-content-center mt-4">
+        <div class="col-6" style='text-align:center'>
+
+            <br>
+            <form class="" method="POST" novalidate style="font-family: 'Quicksand', sans-serif; font-size:20px;"">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <input type="submit" class="btn btn-info" value="save!" style='font-size:30px'>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

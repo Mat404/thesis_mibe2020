@@ -1,0 +1,220 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Hind+Madurai:wght@500&family=Saira+Extra+Condensed:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+
+<style>
+
+
+
+body{margin-top:20px;}
+}
+
+body{
+    margin-top:20px;
+    background:#ddd;
+}
+
+.widget .panel, .widget.panel {
+    border-bottom-width: 1px;
+    border-bottom-color: #cfd9db;
+    overflow: hidden;
+}
+
+.widget {
+    margin-bottom: 20px;
+}
+
+.panel {
+    position: relative;
+    border-width: 1px;
+    border-color: #cfd9db;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 .0625rem .0625rem rgba(0,0,0,.05);
+    box-shadow: 0 .0625rem .0625rem rgba(0,0,0,.05);
+}
+
+.panel-body {
+    position: relative;
+}
+
+.mb0 {
+    margin-bottom: 0!important;
+}
+
+.text-info {
+    color: #22A7F0!important;
+}
+
+.list-table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.list-table>li:first-child {
+    padding-left: 0;
+}
+
+.list-table>li {
+    display: table-cell;
+    table-layout: fixed;
+    vertical-align: middle;
+    width: auto;
+    padding: 0 5px;
+}
+
+.img-bordered-primary {
+    -webkit-box-shadow: 0 0 0 2px #fff,0 0 0 4px #446CB3;
+    box-shadow: 0 0 0 2px #fff,0 0 0 4px #446CB3;
+}
+
+.img-circle {
+    border-radius: 50%!important;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.semibold {
+    font-weight: 600;
+}
+.nm {
+    margin: 0!important;
+}
+
+.ue{
+    background-image: url("/static/img/61205.svg");
+    background-position:center;
+	background-repeat:no-repeat;
+	background-size:cover;
+
+
+
+}
+
+}
+
+</style>
+</head>
+<hr>
+
+
+
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10">
+            {% if request.user == user %}  <p style='font-size:20px;'>  Your Account</p>
+            <h1>Hello @{{user}}</h1></div>
+
+            {% else %}
+
+            {% if request.user == user %}  <p style='font-size:20px;'>  {% endif %} You are visiting :</p>
+            <h1> @{{user}}</h1></div>
+
+
+            {% endif %}
+
+
+
+
+
+
+
+        <div class="col-sm-2">
+
+<img src="https://img.icons8.com/plasticine/100/000000/student-male.png"/>    </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+
+{% for category,score in categories_scores %}
+
+<div class="card">
+  <div class="card-header">
+    <span style='text-decoration: underline;'> The quiz you took </span>: <strong> {{ category.1 }} </strong>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">Here your SCORE: </h5>
+    <p class="card-text"> </p>
+    <a href="#" class="btn btn-primary">{{ score }}</a>
+    {% if score >= 3 %}
+        {% if request.user == user %}
+    <br>
+    <br>
+    <div class="progress">
+      <div class="progress-bar bg-success" role="progressbar" style="width: 99%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"> 100%</div>
+    </div>
+
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Well done!</h4>
+      <p>Aww yeah, you successfully passed the test!!. Here you will find some jobs that you can apply for!.</p>
+    </div>
+
+    <br>
+        {% for job in jobs %}
+            {% if job.categoria == category.0 %}
+
+
+                <div id="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <img src="https://img.icons8.com/flat_round/34/000000/wide-long-right-arrow.png"/>  <span style="padding-left:8px;"></span> {{job.posizione}} <strong> {{job.nome_azienda}} </strong>
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                          <ul>
+                    <li> Description:   {{job.descrizione}} </li>
+                    <li> Email referent:   {{job.email_referente}} </li>
+                         </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                {% endif %}
+        {% endfor %}
+        {% endif %}
+    {% elif score >= 1 and score <= 2 %}
+    <br>
+    <br>
+
+    <div class="progress">
+      <div class="progress-bar bg-info" role="progressbar" style="width: 45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <p class="card-text">  Almost! </p>
+
+    {% else %}
+    <br>
+    <br>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    </div>
+    <p class="card-text">  Did not start yet? </p>
+    {% endif %}
+  </div>
+</div>
+<br>
+
+
+{% endfor %}
+{% endblock content %}
